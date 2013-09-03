@@ -6,7 +6,7 @@
   "scripts": {
     "test": "make test-all",
     "blanket": { 
-      "pattern": "//^((?!(node_modules|test)).)*$/",
+      "pattern": "qn/lib",
       "data-cover-flags": {
         "debug": false
       }
