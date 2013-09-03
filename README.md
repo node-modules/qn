@@ -24,7 +24,7 @@ var client = qn.create({
   // timeout: 3600000, // default rpc timeout: one hour, optional
 });
 
-client.upload(filepath, options, function (err, result) {
+client.uploadFile(filepath, options, function (err, result) {
   
 });
 ```
