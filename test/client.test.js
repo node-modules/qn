@@ -47,19 +47,89 @@ describe('client.test.js', function () {
         should.exist(result);
         result.should.eql({
           hash: 'FiuFB_kYboxBnU6VCMirPzLtIpIq',
-          key: 'FiuFB_kYboxBnU6VCMirPzLtIpIq'
+          key: 'FiuFB_kYboxBnU6VCMirPzLtIpIq',
+          url: 'http://qtestbucket.qiniudn.com/FiuFB_kYboxBnU6VCMirPzLtIpIq'
         })
         done();
       });
     });
 
-    it('should upload a image content with no key', function (done) {
+    it('should upload a foo string with key', function (done) {
+      this.client.upload('foo bar 哈哈', {key: 'foo.md'}, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FiuFB_kYboxBnU6VCMirPzLtIpIq',
+          key: 'foo.md',
+          url: 'http://qtestbucket.qiniudn.com/foo.md'
+        })
+        done();
+      });
+    });
+
+    it('should upload a text content with no filename and no contentType', function (done) {
+      var txtpath = path.join(fixtures, 'big.txt');
+      this.client.upload(fs.readFileSync(txtpath), function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+        })
+        done();
+      });
+    });
+
+    it('should upload a text content with filename', function (done) {
+      var txtpath = path.join(fixtures, 'big.txt');
+      this.client.upload(fs.readFileSync(txtpath), {filename: 'big.txt'}, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+        })
+        done();
+      });
+    });
+
+    it('should upload a text content with key', function (done) {
+      var txtpath = path.join(fixtures, 'big.txt');
+      this.client.upload(fs.readFileSync(txtpath), {key: 'qn/big.txt'}, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          key: 'qn/big.txt',
+          url: 'http://qtestbucket.qiniudn.com/qn/big.txt'
+        })
+        done();
+      });
+    });
+
+    it('should upload a image content with no filename and no contentType', function (done) {
+      this.client.upload(imageContent, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          url: 'http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
+        })
+        done();
+      });
+    });
+
+    it('should upload a image content with filename', function (done) {
       this.client.upload(imageContent, {filename: 'logo.png'}, function (err, result) {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
+          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          url: 'http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
         })
         done();
       });
@@ -71,7 +141,8 @@ describe('client.test.js', function () {
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'qn/logo.png'
+          key: 'qn/logo.png',
+          url: 'http://qtestbucket.qiniudn.com/qn/logo.png'
         })
         done();
       });
@@ -86,7 +157,8 @@ describe('client.test.js', function () {
         should.exist(result);
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
         })
         done();
       });
@@ -94,14 +166,14 @@ describe('client.test.js', function () {
 
     it.skip('should upload a big text stream with no size', function (done) {
       var txtpath = path.join(fixtures, 'big.txt');
-      this.client.upload(fs.createReadStream(txtpath), 
-        {filename: 'big.txt'}, 
+      this.client.upload(fs.createReadStream(txtpath), {filename: 'big.txt'}, 
       function (err, result) {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
         })
         done();
       });
@@ -113,7 +185,8 @@ describe('client.test.js', function () {
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
+          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
         })
         done();
       });
@@ -125,7 +198,8 @@ describe('client.test.js', function () {
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'qn/logo.png'
+          key: 'qn/logo.png',
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
         })
         done();
       });

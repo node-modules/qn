@@ -18,7 +18,9 @@
   "dependencies": {
     "urllib": ">=0.5.1",
     "utility": ">=0.1.0",
-    "formstream": ">=0.0.7"
+    "formstream": ">=0.0.7",
+    "buffer-type": ">=0.0.1",
+    "debug": ">=0.7.2"
   },
   "devDependencies": {
     "should": "*",
