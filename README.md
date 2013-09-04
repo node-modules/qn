@@ -13,6 +13,8 @@ $ npm install qn
 
 ## Usage
 
+### Upload
+
 ```js
 var qn = require('qn');
 
@@ -66,6 +68,44 @@ client.upload(filepath, { 'x:foo': 'bar' }, function (err, result) {
   // x:foo: 'bar'
 });
 ```
+
+### RS Operations
+
+```js
+// stat
+client.stat('foo.txt', function (err, stat) {
+  console.log(stat);
+  // fsize: 8,
+  // hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+  // mimeType: 'text/plain',
+  // putTime: 13783134309588504 
+});
+
+// move
+client.move('foo.txt', 'qn/bar.txt', function (err) {
+  
+});
+
+// copy
+client.copy('foo.txt', 'qn/bar.txt', function (err) {
+  
+});
+
+// delete
+client.delete('foo.txt', function (err) {
+  
+});
+```
+
+## TODO
+
+* [ ] HTTP Keep-alive
+* [ ] Image Operations
+* [ ] Media Operations
+* [ ] Doc Operations
+* [ ] Image Operations
+* [ ] Pipeline Operations
+* [ ] QR code Operations
 
 ## License 
 
