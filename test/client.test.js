@@ -57,15 +57,14 @@ describe('client.test.js', function () {
     it('should upload the logo file', function (done) {
       this.client.uploadFile(imagepath, function (err, result) {
         should.not.exist(err);
-        result.should.eql({
-          hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          url: 'http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          "x:ctime": "1378150371",
-          "x:filename": "logo.png",
-          "x:mtime": "1378150359",
-          "x:size": "21944",
-        });
+        result.should.have.keys('hash', 'key', 'url', 'x:ctime', 'x:filename', 'x:mtime', 'x:size');
+        result.hash.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
+        result.key.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
+        result.url.should.equal('http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
+        result["x:filename"].should.equal('logo.png');
+        result["x:ctime"].should.be.match(/^\d+$/);
+        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:size"].should.equal('21944');
         done();
       });
     });
@@ -73,15 +72,14 @@ describe('client.test.js', function () {
     it('should upload the logo file with key', function (done) {
       this.client.uploadFile(imagepath, {key: 'qn-logo.png'}, function (err, result) {
         should.not.exist(err);
-        result.should.eql({
-          hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'qn-logo.png',
-          url: 'http://qtestbucket.qiniudn.com/qn-logo.png',
-          "x:ctime": "1378150371",
-          "x:filename": "logo.png",
-          "x:mtime": "1378150359",
-          "x:size": "21944",
-        });
+        result.should.have.keys('hash', 'key', 'url', 'x:ctime', 'x:filename', 'x:mtime', 'x:size');
+        result.hash.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
+        result.key.should.equal('qn-logo.png');
+        result.url.should.equal('http://qtestbucket.qiniudn.com/qn-logo.png');
+        result["x:filename"].should.equal('logo.png');
+        result["x:ctime"].should.be.match(/^\d+$/);
+        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:size"].should.equal('21944');
         done();
       });
     });
