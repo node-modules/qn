@@ -107,6 +107,20 @@ client.delete('foo.txt', function (err) {
 * [ ] Pipeline Operations
 * [ ] QR code Operations
 
+## Authors
+
+```bash
+$ git summary 
+
+ project  : qn
+ repo age : 2 days
+ active   : 3 days
+ commits  : 11
+ files    : 15
+ authors  : 
+    11  fengmk2                 100.0%
+```
+
 ## License 
 
 (The MIT License)
