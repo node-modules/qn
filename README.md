@@ -24,8 +24,46 @@ var client = qn.create({
   // timeout: 3600000, // default rpc timeout: one hour, optional
 });
 
-client.uploadFile(filepath, options, function (err, result) {
-  
+// upload a file with custom key
+client.uploadFile(filepath, {key: 'qn/lib/client.js'}, function (err, result) {
+  console.log(result);
+  // {
+  //   hash: 'FhGbwBlFASLrZp2d16Am2bP5A9Ut',
+  //   key: 'qn/lib/client.js',
+  //   url: 'http://qtestbucket.qiniudn.com/qn/lib/client.js'
+  //   "x:ctime": "1378150371",
+  //   "x:filename": "client.js",
+  //   "x:mtime": "1378150359",
+  //   "x:size": "21944",
+  // }
+});
+
+// upload a stream
+client.upload(fs.createReadStream(filepath), function (err, result) {
+  console.log(result);
+  // {
+  //   hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+  //   key: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+  //   url: 'http://qtestbucket.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+  //   "x:filename": "foo.txt",
+  // }
+});
+
+// you also can upload a string or Buffer directly
+client.upload('哈哈', {filename: 'haha.txt'}, function (err, result) {
+  console.log(result);
+  // hash: 'FptOdeKmWhcYHUXa5YmNZxJC934B',
+  // key: 'foobar.txt',
+  // url: 'http://qtestbucket.qiniudn.com/foobar.txt',
+});
+
+// xVariables
+client.upload(filepath, { 'x:foo': 'bar' }, function (err, result) {
+  console.log(result);
+  // hash: 'FptOdeKmWhcYHUXa5YmNZxJC934B',
+  // key: 'foobar.txt',
+  // url: 'http://qtestbucket.qiniudn.com/foobar.txt',
+  // x:foo: 'bar'
 });
 ```
 

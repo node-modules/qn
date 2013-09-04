@@ -17,6 +17,7 @@ var utility = require('utility');
 var qn = require('../');
 var config = require('./config.json');
 
+var root = path.dirname(__dirname);
 var fixtures = path.join(__dirname, 'fixtures');
 var imagepath = path.join(path.dirname(__dirname), 'logo.png');
 var imageContent = fs.readFileSync(imagepath);
@@ -62,7 +63,6 @@ describe('client.test.js', function () {
           url: 'http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           "x:ctime": "1378150371",
           "x:filename": "logo.png",
-          "x:filepath": "/Users/mk2/git/qn/logo.png",
           "x:mtime": "1378150359",
           "x:size": "21944",
         });
@@ -79,7 +79,6 @@ describe('client.test.js', function () {
           url: 'http://qtestbucket.qiniudn.com/qn-logo.png',
           "x:ctime": "1378150371",
           "x:filename": "logo.png",
-          "x:filepath": "/Users/mk2/git/qn/logo.png",
           "x:mtime": "1378150359",
           "x:size": "21944",
         });
@@ -105,6 +104,15 @@ describe('client.test.js', function () {
           key: 'FiuFB_kYboxBnU6VCMirPzLtIpIq',
           url: 'http://qtestbucket.qiniudn.com/FiuFB_kYboxBnU6VCMirPzLtIpIq'
         })
+        done();
+      });
+    });
+
+    it('should return file exists error when upload same key', function (done) {
+      this.client.upload('foo bar 哈哈2', {key: 'foo'}, function (err, result) {
+        should.exist(err);
+        err.name.should.equal('QiniuFileExistsError');
+        err.message.should.equal('file exists');
         done();
       });
     });
@@ -153,7 +161,7 @@ describe('client.test.js', function () {
       var txtpath = path.join(fixtures, 'big.txt');
       this.client.upload(fs.readFileSync(txtpath), function (err, result) {
         should.exist(err);
-        err.name.should.equal('QiniuClientAuthError');
+        err.name.should.equal('QiniuRequestParameterError');
         err.message.should.equal('file is not specified in multipart');
         done();
       });
@@ -163,7 +171,7 @@ describe('client.test.js', function () {
       var txtpath = path.join(fixtures, 'big.txt');
       this.client.upload(fs.readFileSync(txtpath), {contentType: 'text/plain'}, function (err, result) {
         should.exist(err);
-        err.name.should.equal('QiniuClientAuthError');
+        err.name.should.equal('QiniuRequestParameterError');
         err.message.should.equal('file is not specified in multipart');
         done();
       });
@@ -246,22 +254,39 @@ describe('client.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          "x:filename": "big.txt",
         })
         done();
       });
     });
 
-    it.skip('should upload a small text stream with no size', function (done) {
+    it('should upload a small text stream with no size', function (done) {
       var txtpath = path.join(fixtures, 'foo.txt');
-      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo.txt'}, 
+      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo', key: 'foo_chunked.txt'}, 
       function (err, result) {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
-          hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          key: 'foo_chunked.txt',
+          url: 'http://qtestbucket.qiniudn.com/foo_chunked.txt',
+          "x:filename": "foo.txt",
+        })
+        done();
+      });
+    });
+
+    it('should upload a small text stream with no size and no options', function (done) {
+      var txtpath = path.join(fixtures, 'foo.txt');
+      this.client.upload(fs.createReadStream(txtpath), function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          key: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          url: 'http://qtestbucket.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          "x:filename": "foo.txt",
         })
         done();
       });
@@ -277,13 +302,14 @@ describe('client.test.js', function () {
         result.should.eql({
           hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           key: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
-          url: 'http://qtestbucket.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH'
+          url: 'http://qtestbucket.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          "x:filename": "foo.txt",
         })
         done();
       });
     });
 
-    it.skip('should upload a big text stream with no size', function (done) {
+    it('should upload a big text stream with no size', function (done) {
       var txtpath = path.join(fixtures, 'big.txt');
       this.client.upload(fs.createReadStream(txtpath), {filename: 'big.txt'}, 
       function (err, result) {
@@ -292,33 +318,50 @@ describe('client.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          "x:filename": "big.txt",
         })
         done();
       });
     });
 
-    it.skip('should upload a image stream with no key', function (done) {
+    it('should upload a image stream with no key', function (done) {
       this.client.upload(fs.createReadStream(imagepath), {filename: 'logo.png'}, function (err, result) {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          url: 'http://qtestbucket.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          "x:filename": "logo.png",
         })
         done();
       });
     });
 
-    it.skip('should upload a image stream with qn/logo.png key', function (done) {
-      this.client.upload(fs.createReadStream(imagepath), {key: 'qn/logo.png'}, function (err, result) {
+    it.skip('should upload a file stream', function (done) {
+      var filepath = path.join(root, 'lib', 'client.js');
+      this.client.upload(fs.createReadStream(filepath), {filename: filepath, key: 'qn/lib/client.js'}, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.should.eql({
+          hash: 'FhGbwBlFASLrZp2d16Am2bP5A9Ut',
+          key: 'qn/lib/client.js',
+          url: 'http://qtestbucket.qiniudn.com/qn/lib/client.js'
+        })
+        done();
+      });
+    });
+
+    it('should upload a image stream with qn/logo.png key', function (done) {
+      this.client.upload(fs.createReadStream(imagepath), {key: 'qn/logo_chunked.png'}, function (err, result) {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          key: 'qn/logo.png',
-          url: 'http://qtestbucket.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          key: 'qn/logo_chunked.png',
+          url: 'http://qtestbucket.qiniudn.com/qn/logo_chunked.png',
+          "x:filename": "logo.png",
         })
         done();
       });
