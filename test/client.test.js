@@ -10,6 +10,7 @@
  * Module dependencies.
  */
 
+var pedding = require('pedding');
 var should = require('should');
 var fs = require('fs');
 var path = require('path');
@@ -362,6 +363,88 @@ describe('client.test.js', function () {
           "x:filename": "logo.png",
         })
         done();
+      });
+    });
+
+    describe.only('rs: file op', function () {
+      beforeEach(function (done) {
+        done = pedding(2, done);
+        this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op.txt'}, done);
+        this.client.delete('qn_move/rs_op.txt', function () {
+          done();
+        });
+      });
+
+      describe('stat()', function () {
+        it('should return stat of qn/rs_op.txt', function (done) {
+          this.client.stat('qn/rs_op.txt', function (err, info) {
+            should.not.exist(err);
+            should.exist(info);
+            info.should.have.keys('fsize', 'hash', 'mimeType', 'putTime')
+            info.fsize.should.equal(8);
+            info.hash.should.equal('FvnDEnGu6pjzxxxc5d6IlNMrbDnH');
+            info.mimeType.should.equal('text/plain');
+            info.putTime.should.match(/^\d+$/);
+            done();
+          });
+        });
+      });
+
+      describe('move()', function () {
+        it('should move qn/rs_op.txt to qn_move/rs_op.txt', function (done) {
+          this.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+            should.not.exist(err);
+            should.not.exist(result);
+            done();
+          });
+        });
+
+        it('should return QiniuFileNotExistsError when move not exist file', function (done) {
+          this.client.move('qn/rs_op_not_exists.txt', 'qn_move/rs_op.txt', function (err, result) {
+            should.exist(err);
+            err.name.should.equal('QiniuFileNotExistsError');
+            err.message.should.equal('no such file or directory');
+            err.code.should.equal(612);
+            done();
+          });
+        });
+
+        it('should success when src and dest are same', function (done) {
+          var that = this;
+          this.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+            that.client.move('qn_move/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+              should.not.exist(err);
+              should.not.exist(result);
+              done();
+            });
+          });
+        });
+
+        it('should return QiniuFileExistsError', function (done) {
+          var that = this;
+          that.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+            should.not.exist(err);
+            should.not.exist(result);
+            that.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op.txt'}, function (err) {
+              should.not.exist(err);
+              that.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+                should.exist(err);
+                err.name.should.equal('QiniuFileExistsError');
+                err.message.should.equal('file exists');
+                err.code.should.equal(614);
+                done();
+              });
+            });
+          });
+        });
+      });
+
+      describe('copy', function () {
+        
+      });
+
+      describe('delete', function () {
+        
       });
     });
 

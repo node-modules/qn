@@ -23,6 +23,7 @@
     "debug": ">=0.7.2"
   },
   "devDependencies": {
+    "pedding": "*",
     "should": "*",
     "blanket": "*",
     "travis-cov": "*",
