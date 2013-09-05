@@ -14,6 +14,7 @@ var path = require('path');
 var should = require('should');
 var pedding = require('pedding');
 var urllib = require('urllib');
+urllib.TIMEOUT = 10000;
 
 describe('image.test.js', function () {
   before(function () {
@@ -79,7 +80,7 @@ describe('image.test.js', function () {
     });
 
     it('should return error when file is not image', function (done) {
-      var url = this.client.imageView('qn/lib/client.js', {mode: 1, width: 50, height: 50});
+      var url = this.client.imageView('qn/big.txt', {mode: 1, width: 50, height: 50});
       url.should.match(/\?imageView\/1\/w\/50\/h\/50$/);
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
@@ -117,7 +118,7 @@ describe('image.test.js', function () {
 
   describe('imageMogr()', function () {
     it('should rotate a image', function (done) {
-      var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
+      var url = this.client.imageMogr('qn/logo.png', {
         thumbnail: '!50p',
         gravity: 'NorthWest',
         quality: 50,
@@ -137,7 +138,7 @@ describe('image.test.js', function () {
 
   describe('watermark()', function () {
     it('should return text watermark image', function (done) {
-      var url = this.client.watermark('qn/fixtures/gogopher.jpg', {
+      var url = this.client.watermark('qn/logo.png', {
         mode: 2,
         text: 'Node.js 哈哈',
         font: '宋体',

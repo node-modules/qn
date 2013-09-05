@@ -272,14 +272,14 @@ describe('rs.test.js', function () {
 
   describe('batchStat()', function () {
     it('should show 2 files stats', function (done) {
-      this.client.batchStat(['qn/logo.png', 'qn/lib/client.js', 'not-exists-file'], function (err, results) {
+      this.client.batchStat(['qn/logo.png', 'qn/big.txt', 'not-exists-file'], function (err, results) {
         should.not.exist(err);
         should.exist(results);
         results.should.length(3);
         results[0].code.should.equal(200);
         results[0].data.mimeType.should.equal('image/png');
         results[1].code.should.equal(200);
-        results[1].data.mimeType.should.equal('application/javascript');
+        results[1].data.mimeType.should.equal('text/plain');
         results[2].should.eql({ code: 612, data: { error: 'no such file or directory' } });
         done();
       });

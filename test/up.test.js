@@ -337,17 +337,21 @@ describe('up.test.js', function () {
       });
     });
 
-    it.skip('should upload a file stream', function (done) {
+    it('should upload a file stream', function (done) {
       var filepath = path.join(root, 'lib', 'client.js');
-      this.client.upload(fs.createReadStream(filepath), {filename: filepath, key: 'qn/lib/client.js'}, function (err, result) {
-        should.not.exist(err);
-        should.exist(result);
-        result.should.eql({
-          hash: 'FhGbwBlFASLrZp2d16Am2bP5A9Ut',
-          key: 'qn/lib/client.js',
-          url: 'http://qtestbucket.qiniudn.com/qn/lib/client.js'
-        })
-        done();
+      var that = this;
+      that.client.delete('qn/lib/client.js', function () {
+        that.client.upload(fs.createReadStream(filepath), {filename: filepath, key: 'qn/lib/client.js'}, function (err, result) {
+          should.not.exist(err);
+          should.exist(result);
+          result.key.should.equal('qn/lib/client.js');
+          // result.should.eql({
+          //   hash: 'FhGbwBlFASLrZp2d16Am2bP5A9Ut',
+          //   key: 'qn/lib/client.js',
+          //   url: 'http://qtestbucket.qiniudn.com/qn/lib/client.js'
+          // })
+          done();
+        });
       });
     });
 
