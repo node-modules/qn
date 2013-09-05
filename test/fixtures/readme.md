@@ -150,7 +150,7 @@ var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
 * [ ] HTTP Keep-alive
 * [√] Image Operations
 * [ ] Media Operations
-* [√] Doc Operations
+* [ ] Doc Operations
 * [ ] Pipeline Operations
 * [√] QR code Operations
 
