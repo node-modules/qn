@@ -22,6 +22,10 @@ var root = path.dirname(__dirname);
 var fixtures = path.join(__dirname, 'fixtures');
 var imagepath = path.join(path.dirname(__dirname), 'logo.png');
 var imageContent = fs.readFileSync(imagepath);
+var CI_ENV = (process.env.TRAVIS ? 'TRAVIS' : process.env.CI_ENV) + '-' + process.version;
+var rsOpFile = 'qn/rs_op.' + CI_ENV + '.txt';
+var rsOpFileMove = rsOpFile + '.move.txt';
+var rsOpFileCopy = rsOpFile + '.copy.txt';
 
 describe('client.test.js', function () {
   before(function () {
@@ -369,18 +373,18 @@ describe('client.test.js', function () {
     describe('rs: file op', function () {
       beforeEach(function (done) {
         done = pedding(3, done);
-        this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op.txt'}, done);
-        this.client.delete('qn_move/rs_op.txt', function () {
+        this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: rsOpFile}, done);
+        this.client.delete(rsOpFileMove, function () {
           done();
         });
-        this.client.delete('qn_copy/rs_op.txt', function () {
+        this.client.delete(rsOpFileCopy, function () {
           done();
         });
       });
 
       describe('stat()', function () {
-        it('should return stat of qn/rs_op.txt', function (done) {
-          this.client.stat('qn/rs_op.txt', function (err, info) {
+        it('should return stat of ' + rsOpFile, function (done) {
+          this.client.stat(rsOpFile, function (err, info) {
             should.not.exist(err);
             should.exist(info);
             info.should.have.keys('fsize', 'hash', 'mimeType', 'putTime')
@@ -402,8 +406,8 @@ describe('client.test.js', function () {
       });
 
       describe('move()', function () {
-        it('should move qn/rs_op.txt to qn_move/rs_op.txt', function (done) {
-          this.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+        it('should move ' + rsOpFile + ' to ' + rsOpFileMove, function (done) {
+          this.client.move(rsOpFile, rsOpFileMove, function (err, result) {
             should.not.exist(err);
             should.not.exist(result);
             done();
@@ -411,7 +415,7 @@ describe('client.test.js', function () {
         });
 
         it('should return QiniuFileNotExistsError when move not exist file', function (done) {
-          this.client.move('qn/rs_op_not_exists.txt', 'qn_move/rs_op.txt', function (err, result) {
+          this.client.move('qn/rs_op_not_exists.txt', rsOpFileMove, function (err, result) {
             should.exist(err);
             err.name.should.equal('QiniuFileNotExistsError');
             err.message.should.equal('no such file or directory');
@@ -422,8 +426,8 @@ describe('client.test.js', function () {
 
         it('should success when src and dest are same', function (done) {
           var that = this;
-          this.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
-            that.client.move('qn_move/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+          this.client.move(rsOpFile, rsOpFileMove, function (err, result) {
+            that.client.move(rsOpFileMove, rsOpFileMove, function (err, result) {
               should.not.exist(err);
               should.not.exist(result);
               done();
@@ -433,12 +437,12 @@ describe('client.test.js', function () {
 
         it('should return QiniuFileExistsError', function (done) {
           var that = this;
-          that.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+          that.client.move(rsOpFile, rsOpFileMove, function (err, result) {
             should.not.exist(err);
             should.not.exist(result);
-            that.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op.txt'}, function (err) {
+            that.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: rsOpFile}, function (err) {
               should.not.exist(err);
-              that.client.move('qn/rs_op.txt', 'qn_move/rs_op.txt', function (err, result) {
+              that.client.move(rsOpFile, rsOpFileMove, function (err, result) {
                 should.exist(err);
                 err.name.should.equal('QiniuFileExistsError');
                 err.message.should.equal('file exists');
@@ -451,8 +455,8 @@ describe('client.test.js', function () {
       });
 
       describe('copy', function () {
-        it('should copy qn/rs_op.txt to qn_copy/rs_op.txt', function (done) {
-          this.client.copy('qn/rs_op.txt', 'qn_copy/rs_op.txt', function (err, result) {
+        it('should copy ' + rsOpFile + ' to ' + rsOpFileCopy, function (done) {
+          this.client.copy(rsOpFile, rsOpFileCopy, function (err, result) {
             should.not.exist(err);
             should.not.exist(result);
             done();
@@ -460,7 +464,7 @@ describe('client.test.js', function () {
         });
 
         it('should return QiniuFileNotExistsError when copy not exist file', function (done) {
-          this.client.copy('qn/rs_op_not_exists.txt', 'qn_copy/rs_op.txt', function (err, result) {
+          this.client.copy('qn/rs_op_not_exists.txt', rsOpFileCopy, function (err, result) {
             should.exist(err);
             err.name.should.equal('QiniuFileNotExistsError');
             err.message.should.equal('no such file or directory');
@@ -471,8 +475,8 @@ describe('client.test.js', function () {
 
         it('should return QiniuFileExistsError when src and dest are same', function (done) {
           var that = this;
-          this.client.copy('qn/rs_op.txt', 'qn_copy/rs_op.txt', function (err, result) {
-            that.client.copy('qn_copy/rs_op.txt', 'qn_copy/rs_op.txt', function (err, result) {
+          this.client.copy(rsOpFile, rsOpFileCopy, function (err, result) {
+            that.client.copy(rsOpFileCopy, rsOpFileCopy, function (err, result) {
               should.exist(err);
               err.name.should.equal('QiniuFileExistsError');
               err.message.should.equal('file exists');
@@ -483,12 +487,12 @@ describe('client.test.js', function () {
 
         it('should return QiniuFileExistsError', function (done) {
           var that = this;
-          that.client.copy('qn/rs_op.txt', 'qn_copy/rs_op.txt', function (err, result) {
+          that.client.copy(rsOpFile, rsOpFileCopy, function (err, result) {
             should.not.exist(err);
             should.not.exist(result);
-            that.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op.txt'}, function (err) {
+            that.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: rsOpFile}, function (err) {
               should.not.exist(err);
-              that.client.copy('qn/rs_op.txt', 'qn_copy/rs_op.txt', function (err, result) {
+              that.client.copy(rsOpFile, rsOpFileCopy, function (err, result) {
                 should.exist(err);
                 err.name.should.equal('QiniuFileExistsError');
                 err.message.should.equal('file exists');
@@ -502,7 +506,7 @@ describe('client.test.js', function () {
 
       describe('delete', function () {
         it('should delete a exists file', function (done) {
-          this.client.delete('qn/rs_op.txt', function (err, result) {
+          this.client.delete(rsOpFile, function (err, result) {
             should.not.exist(err);
             should.not.exist(result);
             done();
@@ -615,11 +619,11 @@ describe('client.test.js', function () {
   describe('rs batch operations', function () {
     beforeEach(function (done) {
       done = pedding(3, done);
-      this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op_batch.txt'}, done);
-      this.client.delete('qn/rs_op_batch_move.txt', function () {
+      this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: rsOpFile}, done);
+      this.client.delete(rsOpFileMove, function () {
         done();
       });
-      this.client.delete('qn/rs_op_batch_copy.txt', function () {
+      this.client.delete(rsOpFileCopy, function () {
         done();
       });
     });
@@ -643,7 +647,7 @@ describe('client.test.js', function () {
     describe('batchMove()', function () {
       it('should move 2 files', function (done) {
         this.client.batchMove([
-          ['qn/rs_op_batch.txt', 'qn/rs_op_batch_move.txt'],
+          [rsOpFile, rsOpFileMove],
           ['qn/rs_op_batch_notexists.txt', 'qn/rs_op_batch_move_notexists.txt'],
         ], function (err, results) {
           should.not.exist(err);
@@ -660,7 +664,7 @@ describe('client.test.js', function () {
     describe('batchCopy()', function () {
       it('should move 2 files', function (done) {
         this.client.batchCopy([
-          ['qn/rs_op_batch.txt', 'qn/rs_op_batch_copy.txt'],
+          [rsOpFile, rsOpFileCopy],
           ['qn/rs_op_batch_notexists.txt', 'qn/rs_op_batch_copy_notexists.txt'],
         ], function (err, results) {
           should.not.exist(err);
@@ -677,7 +681,7 @@ describe('client.test.js', function () {
     describe('batchDelete()', function () {
       it('should move 2 files', function (done) {
         this.client.batchDelete([
-          'qn/rs_op_batch.txt',
+          rsOpFile,
           'qn/rs_op_batch_notexists.txt',
         ], function (err, results) {
           should.not.exist(err);
