@@ -131,7 +131,7 @@ var url = client.imageView('qn/logo.png', {mode: 1, width: 100, height: 100, q: 
 // http://qtestbucket.qiniudn.com/qn/logo.png?imageView/1/w/100/h/100/q/50/format/png
 
 // imageMogr
-var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
+var url = client.imageMogr('qn/fixtures/gogopher.jpg', {
   thumbnail: '!50p',
   gravity: 'NorthWest',
   quality: 50,
@@ -141,7 +141,28 @@ var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
 // http://qtestbucket.qiniudn.com/qn/fixtures/gogopher.jpg?imageMogr/v2/auto-orient/thumbnail/!50p/gravity/NorthWest/quality/50/rotate/-50/format/gif
 
 // watermark
+var url = client.watermark('qn/logo.png', {
+  mode: 2,
+  text: 'Node.js 哈哈',
+  font: '宋体',
+  fontsize: 500,
+  fill: 'red',
+  dissolve: 100,
+  gravity: 'SouthEast',
+  dx: 100,
+  dy: 90
+});
+// http://qtestbucket.qiniudn.com/qn/fixtures/gogopher.jpg?watermark/2/text/Tm9kZS5qcyDlk4jlk4g=/font/5a6L5L2T/fontsize/500/fill/cmVk/dissolve/100/gravity/SouthEast/dx/100/dy/90
+```
 
+### Document Operations
+
+```js
+// markdown to html
+var url = client.md2html('qn/test/fixtures/readme.md', {
+  css: 'http://qtestbucket.qiniudn.com/qn/test/fixtures/github.css'
+});
+// http://qtestbucket.qiniudn.com/qn/test/fixtures/readme.md?md2html/0/css/aHR0cDovL3F0ZXN0YnVja2V0LnFpbml1ZG4uY29tL3FuL3Rlc3QvZml4dHVyZXMvZ2l0aHViLmNzcw==
 ```
 
 ## TODO
@@ -161,11 +182,11 @@ $ git summary
 
  project  : qn
  repo age : 3 days
- active   : 3 days
- commits  : 19
- files    : 26
+ active   : 4 days
+ commits  : 22
+ files    : 30
  authors  : 
-    19  fengmk2                 100.0%
+    22  fengmk2                 100.0%
 ```
 
 ## License 
