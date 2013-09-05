@@ -383,7 +383,6 @@ describe('client.test.js', function () {
           this.client.stat('qn/rs_op.txt', function (err, info) {
             should.not.exist(err);
             should.exist(info);
-            console.log(info)
             info.should.have.keys('fsize', 'hash', 'mimeType', 'putTime')
             info.fsize.should.equal(8);
             info.hash.should.equal('FvnDEnGu6pjzxxxc5d6IlNMrbDnH');
@@ -520,7 +519,176 @@ describe('client.test.js', function () {
           });
         });
       });
+
+      describe('list()', function () {
+        it('should list / files', function (done) {
+          done = pedding(3, done);
+          this.client.list('/', function (err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.should.have.property('items').with.be.an.instanceof(Array);
+            result.items.length.should.above(0);
+            result.items.forEach(function (item) {
+              item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
+              item.fsize.should.be.a('number');
+              item.putTime.should.be.a('number');
+              item.key.should.be.a('string');
+              item.hash.should.be.a('string');
+              item.mimeType.should.be.a('string');
+            });
+            done();
+          });
+
+          this.client.list('', function (err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.should.have.property('items').with.be.an.instanceof(Array);
+            result.items.length.should.above(0);
+            result.items.forEach(function (item) {
+              item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
+              item.fsize.should.be.a('number');
+              item.putTime.should.be.a('number');
+              item.key.should.be.a('string');
+              item.hash.should.be.a('string');
+              item.mimeType.should.be.a('string');
+            });
+            done();
+          });
+
+          this.client.list(function (err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.should.have.property('items').with.be.an.instanceof(Array);
+            result.items.length.should.above(0);
+            result.items.forEach(function (item) {
+              item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
+              item.fsize.should.be.a('number');
+              item.putTime.should.be.a('number');
+              item.key.should.be.a('string');
+              item.hash.should.be.a('string');
+              item.mimeType.should.be.a('string');
+            });
+            done();
+          });
+        });
+        
+        it('should list /qn limit 2, and next page marker work', function (done) {
+          var that = this;
+          this.client.list({prefix: '/qn', limit: 2}, function (err, result) {
+            should.not.exist(err);
+            result.items.should.length(2);
+            result.marker.should.be.a('string');
+            // next page
+            that.client.list({prefix: '/qn', limit: 3, marker: result.marker}, function (err, result2) {
+              should.not.exist(err);
+              result2.items.should.length(3);
+              result2.marker.should.be.a('string');
+              done();
+            });
+          });
+        });
+
+        it('should limit 0 equal not limit', function (done) {
+          this.client.list({prefix: 'qn/', limit: 0}, function (err, result) {
+            should.not.exist(err);
+            should.exist(result);
+            result.should.have.property('items').with.be.an.instanceof(Array);
+            result.items.length.should.above(0);
+            result.items.forEach(function (item) {
+              item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
+              item.fsize.should.be.a('number');
+              item.putTime.should.be.a('number');
+              item.key.should.be.a('string');
+              item.hash.should.be.a('string');
+              item.mimeType.should.be.a('string');
+            });
+            done();
+          });
+        });
+
+      });
+
     });
 
+  });
+
+  describe('rs batch operations', function () {
+    beforeEach(function (done) {
+      done = pedding(3, done);
+      this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: 'qn/rs_op_batch.txt'}, done);
+      this.client.delete('qn/rs_op_batch_move.txt', function () {
+        done();
+      });
+      this.client.delete('qn/rs_op_batch_copy.txt', function () {
+        done();
+      });
+    });
+
+    describe('batchStat()', function () {
+      it('should show 2 files stats', function (done) {
+        this.client.batchStat(['qn/logo.png', 'qn/lib/client.js', 'not-exists-file'], function (err, results) {
+          should.not.exist(err);
+          should.exist(results);
+          results.should.length(3);
+          results[0].code.should.equal(200);
+          results[0].data.mimeType.should.equal('image/png');
+          results[1].code.should.equal(200);
+          results[1].data.mimeType.should.equal('application/javascript');
+          results[2].should.eql({ code: 612, data: { error: 'no such file or directory' } });
+          done();
+        });
+      });
+    });
+
+    describe('batchMove()', function () {
+      it('should move 2 files', function (done) {
+        this.client.batchMove([
+          ['qn/rs_op_batch.txt', 'qn/rs_op_batch_move.txt'],
+          ['qn/rs_op_batch_notexists.txt', 'qn/rs_op_batch_move_notexists.txt'],
+        ], function (err, results) {
+          should.not.exist(err);
+          should.exist(results);
+          results.should.length(2);
+          results[0].code.should.equal(200);
+          should.not.exist(results[0].data);
+          results[1].should.eql({ code: 612, data: { error: 'no such file or directory' } });
+          done();
+        });
+      });
+    });
+
+    describe('batchCopy()', function () {
+      it('should move 2 files', function (done) {
+        this.client.batchCopy([
+          ['qn/rs_op_batch.txt', 'qn/rs_op_batch_copy.txt'],
+          ['qn/rs_op_batch_notexists.txt', 'qn/rs_op_batch_copy_notexists.txt'],
+        ], function (err, results) {
+          should.not.exist(err);
+          should.exist(results);
+          results.should.length(2);
+          results[0].code.should.equal(200);
+          should.not.exist(results[0].data);
+          results[1].should.eql({ code: 612, data: { error: 'no such file or directory' } });
+          done();
+        });
+      });
+    });
+
+    describe('batchDelete()', function () {
+      it('should move 2 files', function (done) {
+        this.client.batchDelete([
+          'qn/rs_op_batch.txt',
+          'qn/rs_op_batch_notexists.txt',
+        ], function (err, results) {
+          should.not.exist(err);
+          should.exist(results);
+          results.should.length(2);
+          results[0].code.should.equal(200);
+          should.not.exist(results[0].data);
+          results[1].should.eql({ code: 612, data: { error: 'no such file or directory' } });
+          done();
+        });
+      });
+    });
   });
 });

@@ -14,9 +14,11 @@ test: install
 		$(TESTS)
 
 test-cov:
+	@$(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=travis-cov
+
+test-cov-html:
 	@rm -f coverage.html
 	@$(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=html-cov > coverage.html
-	@$(MAKE) test MOCHA_OPTS='--require blanket' REPORTER=travis-cov
 	@ls -lh coverage.html
 
 test-coveralls: test

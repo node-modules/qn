@@ -95,15 +95,30 @@ client.copy('foo.txt', 'qn/bar.txt', function (err) {
 client.delete('foo.txt', function (err) {
   
 });
+
+// list
+client.list('/', function (err, result) {
+  console.log(result);
+  // marker: 'eyJjIjowLCJrIjoicW4vYmlnLnR4dCJ9'
+  // items: [
+  //   { 
+  //     fsize: 21944,
+  //     putTime: 13783144546186030,
+  //     key: 'qn/logo.png',
+  //     hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+  //     mimeType: 'image/png'
+  //   }, ...
+  // ]
+});
 ```
 
 ## TODO
 
+* [√] RS Operations
 * [ ] HTTP Keep-alive
 * [ ] Image Operations
 * [ ] Media Operations
 * [ ] Doc Operations
-* [ ] Image Operations
 * [ ] Pipeline Operations
 * [ ] QR code Operations
 
