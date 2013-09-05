@@ -1,4 +1,13 @@
 
+0.0.5 / 2013-09-05 
+==================
+
+  * add image operations
+  * add qrcode(key, mode, level)
+  * Refactor test dir
+  * Refactor
+  * fix tests for ci
+
 0.0.4 / 2013-09-05 
 ==================
 

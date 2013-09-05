@@ -1,6 +1,6 @@
 {
   "name": "qn",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.",
   "main": "index.js",
   "scripts": {
@@ -42,11 +42,11 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "qn"
+    "qn", "qiniu", "qbox", "node-qiniu"
   ],
   "engines": {
     "node": ">= 0.8.0"
   },
-  "author": "fengmk2 <fengmk2@gmail.com>  (http://fengmk2.github.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
   "license": "MIT"
 }

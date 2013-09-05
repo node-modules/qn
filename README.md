@@ -148,11 +148,11 @@ var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
 
 * [√] RS Operations
 * [ ] HTTP Keep-alive
-* [ ] Image Operations
+* [√] Image Operations
 * [ ] Media Operations
 * [ ] Doc Operations
 * [ ] Pipeline Operations
-* [ ] QR code Operations
+* [√] QR code Operations
 
 ## Authors
 
@@ -160,12 +160,12 @@ var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
 $ git summary 
 
  project  : qn
- repo age : 2 days
+ repo age : 3 days
  active   : 3 days
- commits  : 11
- files    : 15
+ commits  : 19
+ files    : 26
  authors  : 
-    11  fengmk2                 100.0%
+    19  fengmk2                 100.0%
 ```
 
 ## License 
