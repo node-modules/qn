@@ -14,7 +14,7 @@ var should = require('should');
 var urllib = require('urllib');
 var pedding = require('pedding');
 
-describe.only('other.test.js', function () {
+describe('other.test.js', function () {
   before(function () {
     this.client = require('./qn');
   });

@@ -92,7 +92,7 @@ describe('up.test.js', function () {
     });
   });
 
-  describe('upload', function () {
+  describe('upload()', function () {
     it('should upload a foo string with filename', function (done) {
       this.client.upload('foo bar 哈哈', {filename: 'foo'}, function (err, result) {
         should.not.exist(err);
@@ -107,7 +107,7 @@ describe('up.test.js', function () {
     });
 
     it('should return file exists error when upload same key', function (done) {
-      this.client.upload('foo bar 哈哈2', {key: 'foo'}, function (err, result) {
+      this.client.upload('foo bar 哈哈2', {key: 'foo'}, function (err, result, res) {
         should.exist(err);
         err.name.should.equal('QiniuFileExistsError');
         err.message.should.equal('file exists');

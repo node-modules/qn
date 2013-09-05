@@ -112,6 +112,38 @@ client.list('/', function (err, result) {
 });
 ```
 
+### Image operations
+
+```js
+// imageInfo
+client.imageInfo('qn/logo.png', function (err, info) {
+  console.log(info);
+  // { format: 'png', width: 190, height: 150, colorModel: 'nrgba' }
+});
+
+// exif
+client.exif('qn/logo.png', function (err, exif) {
+  
+});
+
+// imageView
+var url = client.imageView('qn/logo.png', {mode: 1, width: 100, height: 100, q: 50, format: 'png'});
+// http://qtestbucket.qiniudn.com/qn/logo.png?imageView/1/w/100/h/100/q/50/format/png
+
+// imageMogr
+var url = this.client.imageMogr('qn/fixtures/gogopher.jpg', {
+  thumbnail: '!50p',
+  gravity: 'NorthWest',
+  quality: 50,
+  rotate: -50,
+  format: 'gif'
+});
+// http://qtestbucket.qiniudn.com/qn/fixtures/gogopher.jpg?imageMogr/v2/auto-orient/thumbnail/!50p/gravity/NorthWest/quality/50/rotate/-50/format/gif
+
+// watermark
+
+```
+
 ## TODO
 
 * [√] RS Operations
