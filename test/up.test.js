@@ -84,6 +84,27 @@ describe('up.test.js', function () {
       });
     });
 
+    it('should upload the logo file with key: /qn/test/logo.png', function (done) {
+      var that = this;
+      this.client.uploadFile(imagepath, {key: '/qn/test/logo.png'}, function (err, result) {
+        should.not.exist(err);
+        result.should.have.keys('hash', 'key', 'url', 'x:ctime', 'x:filename', 'x:mtime', 'x:size');
+        result.hash.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
+        result.key.should.equal('qn/test/logo.png');
+        result.url.should.equal('http://qtestbucket.qiniudn.com/qn/test/logo.png');
+        result["x:filename"].should.equal('logo.png');
+        result["x:ctime"].should.be.match(/^\d+$/);
+        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:size"].should.equal('21944');
+        
+        that.client.list('/qn/test/', function (err, result) {
+          should.not.exist(err);
+          result.items.length.should.above(0);
+          done();
+        });
+      });
+    });
+
     it('should return err when file not exist', function (done) {
       this.client.uploadFile(imagepath + 'notexists', function (err) {
         should.exist(err);
