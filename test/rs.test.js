@@ -163,8 +163,16 @@ describe('rs.test.js', function () {
   });
 
   describe('delete', function () {
-    it('should delete a exists file', function (done) {
+    it('should delete "' + rsOpFile + '" file', function (done) {
       this.client.delete(rsOpFile, function (err, result) {
+        should.not.exist(err);
+        should.not.exist(result);
+        done();
+      });
+    });
+
+    it('should delete "' + '/' + rsOpFile + '" file', function (done) {
+      this.client.delete('/' + rsOpFile, function (err, result) {
         should.not.exist(err);
         should.not.exist(result);
         done();
