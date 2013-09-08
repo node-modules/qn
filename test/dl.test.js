@@ -15,6 +15,8 @@ var fs = require('fs');
 var should = require('should');
 var urllib = require('urllib');
 
+var CI_ENV = (process.env.TRAVIS ? 'TRAVIS' : process.env.CI_ENV) + '-' + process.version;
+
 describe('dl.test.js', function () {
   var filepath = path.join(__dirname, 'fixtures', 'foo.txt');
   var fooData = fs.readFileSync(filepath);
@@ -50,6 +52,18 @@ describe('dl.test.js', function () {
         should.exist(err);
         err.name.should.equal('QiniuNotFoundError');
         err.message.should.equal('status 404');
+        done();
+      });
+    });
+
+    it('should download content to a stream', function (done) {
+      var savePath = '/tmp/qn_logo.png_' + CI_ENV
+      var stream = fs.createWriteStream(savePath);
+      this.client.download('/qn/test/logo.png', {writeStream: stream}, function (err, data, res) {
+        should.not.exist(err);
+        should.not.exist(data);
+        res.should.status(200);
+        fs.statSync(savePath).size.should.equal(21944);
         done();
       });
     });
