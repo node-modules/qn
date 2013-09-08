@@ -13,6 +13,7 @@
 var path = require('path');
 var fs = require('fs');
 var should = require('should');
+var urllib = require('urllib');
 
 describe('dl.test.js', function () {
   var filepath = path.join(__dirname, 'fixtures', 'foo.txt');
@@ -54,4 +55,18 @@ describe('dl.test.js', function () {
     });
   });
 
+
+  describe('saveAsURL()', function () {
+    it('should return a saveAs URL', function (done) {
+      var url = this.client.saveAsURL('qn/test/dl/foo.txt', '哈哈foo.txt');
+      url.should.equal(this.client.saveAsURL('/qn/test/dl/foo.txt', '哈哈foo.txt'));
+      url.should.equal('http://qtestbucket.qiniudn.com/qn/test/dl/foo.txt?download/%E5%93%88%E5%93%88foo.txt');
+      urllib.request(url, function (err, data, res) {
+        should.not.exist(err);
+        data.toString().should.equal(fooData.toString());
+        res.should.have.header('content-disposition', 'attachment;filename="%E5%93%88%E5%93%88foo.txt"');
+        done();
+      });
+    });
+  });
 });

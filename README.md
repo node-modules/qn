@@ -69,6 +69,20 @@ client.upload(filepath, { 'x:foo': 'bar' }, function (err, result) {
 });
 ```
 
+### Download
+
+```js
+// download to Buffer
+client.download('foo.txt', function (err, content, res) {
+  // content is a Buffer instance.
+  console.log('content size: %d', content.length);
+});
+
+// save as url
+var url = client.saveAsURL('qn/test/dl/foo.txt', '哈哈foo.txt');
+// http://qtestbucket.qiniudn.com/qn/test/dl/foo.txt?download/%E5%93%88%E5%93%88foo.txt
+```
+
 ### RS Operations
 
 ```js
