@@ -1,4 +1,9 @@
 
+0.1.3 / 2013-09-09 
+==================
+
+  * use global default timeout if options.timeout not set.
+
 0.1.2 / 2013-09-08 
 ==================
 
