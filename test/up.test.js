@@ -96,7 +96,7 @@ describe('up.test.js', function () {
         result["x:ctime"].should.be.match(/^\d+$/);
         result["x:mtime"].should.be.match(/^\d+$/);
         result["x:size"].should.equal('21944');
-        
+
         that.client.list('/qn/test/', function (err, result) {
           should.not.exist(err);
           result.items.length.should.above(0);
@@ -138,8 +138,8 @@ describe('up.test.js', function () {
 
     it('should upload a foobar string with key and x:headers', function (done) {
       this.client.upload('foo foo bar 哈哈', {
-        key: 'foobar.txt', 
-        'x:foo': 'bar哈哈', 
+        key: 'foobar.txt',
+        'x:foo': 'bar哈哈',
         "x:filepath":"/Users/mk2/git/qn/logo.png",
         "x:filename":"logo.png",
         "x:size": 21944,
@@ -265,8 +265,8 @@ describe('up.test.js', function () {
 
     it('should upload a big text stream with size', function (done) {
       var txtpath = path.join(fixtures, 'big.txt');
-      this.client.upload(fs.createReadStream(txtpath), 
-        {filename: 'big.txt', size: fs.statSync(txtpath).size}, 
+      this.client.upload(fs.createReadStream(txtpath),
+        {filename: 'big.txt', size: fs.statSync(txtpath).size},
       function (err, result) {
         should.not.exist(err);
         should.exist(result);
@@ -282,7 +282,7 @@ describe('up.test.js', function () {
 
     it('should upload a small text stream with no size', function (done) {
       var txtpath = path.join(fixtures, 'foo.txt');
-      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo', key: 'foo_chunked.txt'}, 
+      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo', key: 'foo_chunked.txt'},
       function (err, result) {
         should.not.exist(err);
         should.exist(result);
@@ -314,7 +314,7 @@ describe('up.test.js', function () {
     it('should upload a small text stream with size', function (done) {
       var txtpath = path.join(fixtures, 'foo.txt');
       var size = fs.statSync(txtpath).size;
-      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo.txt', size: size}, 
+      this.client.upload(fs.createReadStream(txtpath), {filename: 'foo.txt', size: size},
       function (err, result) {
         should.not.exist(err);
         should.exist(result);
@@ -330,7 +330,7 @@ describe('up.test.js', function () {
 
     it('should upload a big text stream with no size', function (done) {
       var txtpath = path.join(fixtures, 'big.txt');
-      this.client.upload(fs.createReadStream(txtpath), {filename: 'big.txt'}, 
+      this.client.upload(fs.createReadStream(txtpath), {filename: 'big.txt'},
       function (err, result) {
         should.not.exist(err);
         should.exist(result);

@@ -22,7 +22,7 @@ var client = qn.create({
   accessKey: 'your access key',
   secretKey: 'your secret key',
   bucket: 'your bucket name',
-  // domain: 'your domain', // optional
+  domain: 'http://{bucket}.u.qiniudn.com',
   // timeout: 3600000, // default rpc timeout: one hour, optional
 });
 
@@ -92,22 +92,22 @@ client.stat('foo.txt', function (err, stat) {
   // fsize: 8,
   // hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
   // mimeType: 'text/plain',
-  // putTime: 13783134309588504 
+  // putTime: 13783134309588504
 });
 
 // move
 client.move('foo.txt', 'qn/bar.txt', function (err) {
-  
+
 });
 
 // copy
 client.copy('foo.txt', 'qn/bar.txt', function (err) {
-  
+
 });
 
 // delete
 client.delete('foo.txt', function (err) {
-  
+
 });
 
 // list
@@ -115,7 +115,7 @@ client.list('/', function (err, result) {
   console.log(result);
   // marker: 'eyJjIjowLCJrIjoicW4vYmlnLnR4dCJ9'
   // items: [
-  //   { 
+  //   {
   //     fsize: 21944,
   //     putTime: 13783144546186030,
   //     key: 'qn/logo.png',
@@ -137,7 +137,7 @@ client.imageInfo('qn/logo.png', function (err, info) {
 
 // exif
 client.exif('qn/logo.png', function (err, exif) {
-  
+
 });
 
 // imageView
@@ -192,18 +192,18 @@ var url = client.md2html('qn/test/fixtures/readme.md', {
 ## Authors
 
 ```bash
-$ git summary 
+$ git summary
 
  project  : qn
  repo age : 3 days
  active   : 4 days
  commits  : 22
  files    : 30
- authors  : 
+ authors  :
     22  fengmk2                 100.0%
 ```
 
-## License 
+## License
 
 (The MIT License)
 

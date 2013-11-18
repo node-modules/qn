@@ -1,5 +1,6 @@
 /*!
  * qn - test/rs.test.js
+ *
  * Copyright(c) 2013 fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
  * MIT Licensed
  */
@@ -9,7 +10,6 @@
 /**
  * Module dependencies.
  */
-
 
 var pedding = require('pedding');
 var should = require('should');
@@ -28,7 +28,7 @@ describe('rs.test.js', function () {
   before(function () {
     this.client = require('./qn');
   });
-      
+
   beforeEach(function (done) {
     done = pedding(3, done);
     this.client.uploadFile(path.join(fixtures, 'foo.txt'), {key: rsOpFile}, done);
@@ -82,12 +82,12 @@ describe('rs.test.js', function () {
       });
     });
 
-    it('should success when src and dest are same', function (done) {
+    it('should return QiniuFileExistsError when src and dest are same', function (done) {
       var that = this;
       this.client.move(rsOpFile, rsOpFileMove, function (err, result) {
         that.client.move(rsOpFileMove, rsOpFileMove, function (err, result) {
-          should.not.exist(err);
-          should.not.exist(result);
+          should.exist(err);
+          err.name.should.equal('QiniuFileExistsError');
           done();
         });
       });
@@ -241,17 +241,17 @@ describe('rs.test.js', function () {
         done();
       });
     });
-    
-    it('should list /qn limit 2, and next page marker work', function (done) {
+
+    it('should list /qn limit 5, and next page marker work', function (done) {
       var that = this;
-      this.client.list({prefix: '/qn', limit: 2}, function (err, result) {
+      this.client.list({prefix: '/qnfs/test/fixtures/foo.txt', limit: 5}, function (err, result) {
         should.not.exist(err);
-        result.items.should.length(2);
+        result.items.should.length(5);
         result.marker.should.be.a('string');
         // next page
-        that.client.list({prefix: '/qn', limit: 3, marker: result.marker}, function (err, result2) {
+        that.client.list({prefix: '/qn', limit: 11, marker: result.marker}, function (err, result2) {
           should.not.exist(err);
-          result2.items.should.length(3);
+          result2.items.should.length(11);
           result2.marker.should.be.a('string');
           done();
         });

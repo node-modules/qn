@@ -69,7 +69,6 @@ describe('dl.test.js', function () {
     });
   });
 
-
   describe('saveAsURL()', function () {
     it('should return a saveAs URL', function (done) {
       var url = this.client.saveAsURL('qn/test/dl/foo.txt', '哈哈foo.txt');
@@ -78,7 +77,7 @@ describe('dl.test.js', function () {
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.toString().should.equal(fooData.toString());
-        res.should.have.header('content-disposition', 'attachment;filename="%E5%93%88%E5%93%88foo.txt"');
+        res.should.have.header('content-disposition', 'attachment;filename="哈哈foo.txt"');
         done();
       });
     });
