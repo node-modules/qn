@@ -1,6 +1,8 @@
 qn [![Build Status](https://secure.travis-ci.org/fengmk2/qn.png)](http://travis-ci.org/fengmk2/qn) [![Coverage Status](https://coveralls.io/repos/fengmk2/qn/badge.png)](https://coveralls.io/r/fengmk2/qn) [![Build Status](https://drone.io/github.com/fengmk2/qn/status.png)](https://drone.io/github.com/fengmk2/qn/latest)
 =======
 
+[![NPM](https://nodei.co/npm/qn.png?downloads=true&stars=true)](https://nodei.co/npm/qn)
+
 ![logo](https://raw.github.com/fengmk2/qn/master/logo.png)
 
 Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.
