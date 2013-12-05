@@ -154,7 +154,7 @@ describe('image.test.js', function () {
         should.not.exist(err);
         data.length.should.above(0);
         res.should.status(200);
-        res.should.have.header('Content-Type', 'image/jpeg');
+        res.should.have.header('Content-Type', 'image/png');
         done();
       });
     });
