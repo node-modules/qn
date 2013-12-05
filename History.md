@@ -1,4 +1,13 @@
 
+0.2.0 / 2013-12-06 
+==================
+
+  * set content-length on rs op
+  * add npm image
+  * update test cases
+  * download work with options.writeStream
+  * move signData() to Qiniu
+
 0.1.3 / 2013-09-09 
 ==================
 
