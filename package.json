@@ -1,11 +1,11 @@
 {
   "name": "qn",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.",
   "main": "index.js",
   "scripts": {
     "test": "make test-all",
-    "blanket": { 
+    "blanket": {
       "pattern": "qn/lib",
       "data-cover-flags": {
         "debug": false
@@ -16,20 +16,21 @@
     }
   },
   "dependencies": {
-    "urllib": ">=0.5.1",
-    "utility": ">=0.1.0",
-    "formstream": ">=0.0.7",
-    "buffer-type": ">=0.0.1",
-    "debug": ">=0.7.2"
+    "buffer-type": "0.0.1",
+    "debug": "0.7.4",
+    "formstream": "0.0.8",
+    "urllib": "0.5.8",
+    "utility": "0.1.10"
   },
   "devDependencies": {
-    "pedding": "*",
-    "should": "*",
+    "autod": "*",
     "blanket": "*",
-    "travis-cov": "*",
     "coveralls": "*",
+    "mocha": "*",
     "mocha-lcov-reporter": "*",
-    "mocha": "*"
+    "pedding": "0.0.3",
+    "should": "3.1.3",
+    "travis-cov": "*"
   },
   "homepage": "https://github.com/fengmk2/qn",
   "repository": {
