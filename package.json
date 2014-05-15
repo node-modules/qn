@@ -1,6 +1,6 @@
 {
   "name": "qn",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.",
   "main": "index.js",
   "scripts": {
