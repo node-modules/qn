@@ -28,7 +28,7 @@ test-coveralls: test
 test-all: test test-cov
 
 autod: install
-	@./node_modules/.bin/autod -w
+	@./node_modules/.bin/autod -w --prefix "~"
 	@$(MAKE) install
 
 .PHONY: test

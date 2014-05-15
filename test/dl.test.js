@@ -77,7 +77,7 @@ describe('dl.test.js', function () {
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.toString().should.equal(fooData.toString());
-        res.should.have.header('content-disposition', 'attachment;filename="哈哈foo.txt"');
+        res.should.have.header('content-disposition', 'attachment; filename="ååfoo.txt"');
         done();
       });
     });

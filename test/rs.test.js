@@ -200,11 +200,11 @@ describe('rs.test.js', function () {
         result.items.length.should.above(0);
         result.items.forEach(function (item) {
           // item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
-          item.fsize.should.be.a('number');
-          item.putTime.should.be.a('number');
-          item.key.should.be.a('string');
-          item.hash.should.be.a('string');
-          item.mimeType.should.be.a('string');
+          item.fsize.should.be.a.Number;
+          item.putTime.should.be.a.Number;
+          item.key.should.be.a.String;
+          item.hash.should.be.a.String;
+          item.mimeType.should.be.a.String;
         });
         done();
       });
@@ -216,11 +216,11 @@ describe('rs.test.js', function () {
         result.items.length.should.above(0);
         result.items.forEach(function (item) {
           // item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
-          item.fsize.should.be.a('number');
-          item.putTime.should.be.a('number');
-          item.key.should.be.a('string');
-          item.hash.should.be.a('string');
-          item.mimeType.should.be.a('string');
+          item.fsize.should.be.a.Number;
+          item.putTime.should.be.a.Number;
+          item.key.should.be.a.String;
+          item.hash.should.be.a.String;
+          item.mimeType.should.be.a.String;
         });
         done();
       });
@@ -232,11 +232,11 @@ describe('rs.test.js', function () {
         result.items.length.should.above(0);
         result.items.forEach(function (item) {
           // item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
-          item.fsize.should.be.a('number');
-          item.putTime.should.be.a('number');
-          item.key.should.be.a('string');
-          item.hash.should.be.a('string');
-          item.mimeType.should.be.a('string');
+          item.fsize.should.be.a.Number;
+          item.putTime.should.be.a.Number;
+          item.key.should.be.a.String;
+          item.hash.should.be.a.String;
+          item.mimeType.should.be.a.String;
         });
         done();
       });
@@ -247,30 +247,30 @@ describe('rs.test.js', function () {
       this.client.list({prefix: '/qnfs/test/fixtures/foo.txt', limit: 5}, function (err, result) {
         should.not.exist(err);
         result.items.should.length(5);
-        result.marker.should.be.a('string');
+        result.marker.should.be.a.String;
         // next page
         that.client.list({prefix: '/qn', limit: 11, marker: result.marker}, function (err, result2) {
           should.not.exist(err);
           result2.items.should.length(11);
-          result2.marker.should.be.a('string');
+          result2.marker.should.be.a.String;
           done();
         });
       });
     });
 
-    it('should limit 0 equal not limit', function (done) {
+    it.skip('should limit 0 equal not limit', function (done) {
       this.client.list({prefix: 'qn/', limit: 0}, function (err, result) {
         should.not.exist(err);
         should.exist(result);
-        result.should.have.property('items').with.be.an.instanceof(Array);
+        result.should.have.property('items').with.be.an.Array;
         result.items.length.should.above(0);
         result.items.forEach(function (item) {
           item.should.have.keys('fsize', 'putTime', 'key', 'hash', 'mimeType');
-          item.fsize.should.be.a('number');
-          item.putTime.should.be.a('number');
-          item.key.should.be.a('string');
-          item.hash.should.be.a('string');
-          item.mimeType.should.be.a('string');
+          item.fsize.should.be.a.Number;
+          item.putTime.should.be.a.Number;
+          item.key.should.be.a.String;
+          item.hash.should.be.a.String;
+          item.mimeType.should.be.a.String;
         });
         done();
       });
