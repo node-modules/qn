@@ -85,8 +85,8 @@ describe('image.test.js', function () {
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);
-        data.toString().should.equal('{"error":"image: unknown format"}');
-        res.should.status(599);
+        data.toString().should.equal('{"error":"unsupported format:image: unknown format"}');
+        res.should.status(400);
         done();
       });
     });

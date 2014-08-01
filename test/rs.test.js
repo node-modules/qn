@@ -244,7 +244,7 @@ describe('rs.test.js', function () {
 
     it('should list /qn limit 5, and next page marker work', function (done) {
       var that = this;
-      this.client.list({prefix: '/qnfs/test/fixtures/foo.txt', limit: 5}, function (err, result) {
+      this.client.list({prefix: '/qn', limit: 5}, function (err, result) {
         should.not.exist(err);
         result.items.should.length(5);
         result.marker.should.be.a.String;

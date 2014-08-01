@@ -29,7 +29,7 @@ describe('doc.test.js', function () {
   describe('md2html()', function () {
     it('should convert markdown to html', function (done) {
       var url = this.client.md2html('qn/test/fixtures/readme.md');
-      url.should.equal('http://qtestbucket.qiniudn.com/qn/test/fixtures/readme.md?md2html');
+      url.should.containEql('.qiniudn.com/qn/test/fixtures/readme.md?md2html');
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);
@@ -41,9 +41,9 @@ describe('doc.test.js', function () {
 
     it('should convert markdown to html with css', function (done) {
       var url = this.client.md2html('qn/test/fixtures/readme.md', {
-        css: 'http://qtestbucket.qiniudn.com/qn/test/fixtures/github.css'
+        css: 'http://qiniu-sdk-test.qiniudn.com/qn/test/fixtures/github.css'
       });
-      url.should.equal('http://qtestbucket.qiniudn.com/qn/test/fixtures/readme.md?md2html/0/css/aHR0cDovL3F0ZXN0YnVja2V0LnFpbml1ZG4uY29tL3FuL3Rlc3QvZml4dHVyZXMvZ2l0aHViLmNzcw==');
+      url.should.containEql('.qiniudn.com/qn/test/fixtures/readme.md?md2html/0/css/aHR0cDovL3Fpbml1LXNkay10ZXN0LnFpbml1ZG4uY29tL3FuL3Rlc3QvZml4dHVyZXMvZ2l0aHViLmNzcw==');
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);
@@ -55,7 +55,7 @@ describe('doc.test.js', function () {
 
     it('should convert markdown to only body html', function (done) {
       var url = this.client.md2html('qn/test/fixtures/readme.md', {mode: 1});
-      url.should.equal('http://qtestbucket.qiniudn.com/qn/test/fixtures/readme.md?md2html/1');
+      url.should.containEql('.qiniudn.com/qn/test/fixtures/readme.md?md2html/1');
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);
