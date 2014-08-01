@@ -62,8 +62,8 @@ describe('up.test.js', function () {
         result.key.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
         result.url.should.containEql('.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
         result["x:filename"].should.equal('logo.png');
-        result["x:ctime"].should.be.match(/^\d+$/);
-        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:ctime"].should.be.match(/^[\d\.]+$/);
+        result["x:mtime"].should.be.match(/^[\d\.]+$/);
         result["x:size"].should.equal('21944');
         done();
       });
@@ -77,8 +77,8 @@ describe('up.test.js', function () {
         result.key.should.equal('qn-logo.png');
         result.url.should.containEql('.qiniudn.com/qn-logo.png');
         result["x:filename"].should.equal('logo.png');
-        result["x:ctime"].should.be.match(/^\d+$/);
-        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:ctime"].should.be.match(/^[\d\.]+$/);
+        result["x:mtime"].should.be.match(/^[\d\.]+$/);
         result["x:size"].should.equal('21944');
         done();
       });
@@ -93,8 +93,8 @@ describe('up.test.js', function () {
         result.key.should.equal('qn/test/logo.png');
         result.url.should.equal('http://qiniu-sdk-test.qiniudn.com/qn/test/logo.png');
         result["x:filename"].should.equal('logo.png');
-        result["x:ctime"].should.be.match(/^\d+$/);
-        result["x:mtime"].should.be.match(/^\d+$/);
+        result["x:ctime"].should.be.match(/^[\d\.]+$/);
+        result["x:mtime"].should.be.match(/^[\d\.]+$/);
         result["x:size"].should.equal('21944');
 
         that.client.list('/qn/test/', function (err, result) {
