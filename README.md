@@ -1,9 +1,24 @@
-qn [![Build Status](https://secure.travis-ci.org/fengmk2/qn.png)](http://travis-ci.org/fengmk2/qn) [![Coverage Status](https://coveralls.io/repos/fengmk2/qn/badge.png)](https://coveralls.io/r/fengmk2/qn) [![Build Status](https://drone.io/github.com/fengmk2/qn/status.png)](https://drone.io/github.com/fengmk2/qn/latest)
+qn
 =======
 
-[![NPM](https://nodei.co/npm/qn.png?downloads=true&stars=true)](https://nodei.co/npm/qn)
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Gittip][gittip-image]][gittip-url]
+[![David deps][david-image]][david-url]
 
-![logo](https://raw.github.com/fengmk2/qn/master/logo.png)
+[npm-image]: https://img.shields.io/npm/v/qn.svg?style=flat
+[npm-url]: https://npmjs.org/package/qn
+[travis-image]: https://img.shields.io/travis/node-modules/qn.svg?style=flat
+[travis-url]: https://travis-ci.org/node-modules/qn
+[coveralls-image]: https://img.shields.io/coveralls/node-modules/qn.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/node-modules/qn?branch=master
+[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
+[gittip-url]: https://www.gittip.com/fengmk2/
+[david-image]: https://img.shields.io/david/node-modules/qn.svg?style=flat
+[david-url]: https://david-dm.org/node-modules/qn
+
+![logo](https://raw.github.com/node-modules/qn/master/logo.png)
 
 Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.
 
@@ -191,25 +206,11 @@ var url = client.md2html('qn/test/fixtures/readme.md', {
 * [ ] Pipeline Operations
 * [√] QR code Operations
 
-## Authors
-
-```bash
-$ git summary
-
- project  : qn
- repo age : 3 days
- active   : 4 days
- commits  : 22
- files    : 30
- authors  :
-    22  fengmk2                 100.0%
-```
-
 ## License
 
 (The MIT License)
 
-Copyright (c) 2013 fengmk2 &lt;fengmk2@gmail.com&gt;
+Copyright (c) 2013 - 2014 fengmk2 &lt;fengmk2@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

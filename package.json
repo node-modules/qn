@@ -4,49 +4,43 @@
   "description": "Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.",
   "main": "index.js",
   "scripts": {
-    "test": "make test-all",
-    "blanket": {
-      "pattern": "qn/lib",
-      "data-cover-flags": {
-        "debug": false
-      }
-    },
-    "travis-cov": {
+    "test": "make test-all"
+  },
+  "config": {
+    "cov": {
       "threshold": 85
     }
   },
   "dependencies": {
     "buffer-type": "~0.0.2",
-    "debug": "~0.8.1",
+    "debug": "~1.0.4",
     "formstream": "~0.0.8",
     "urllib": "~0.5.16",
-    "utility": "~0.1.13"
+    "utility": "~1.0.0"
   },
   "devDependencies": {
     "autod": "*",
-    "blanket": "*",
-    "coveralls": "*",
+    "cov": "*",
+    "istanbul": "*",
     "mocha": "*",
-    "mocha-lcov-reporter": "*",
-    "pedding": "~0.0.3",
-    "should": "~3.3.1",
-    "travis-cov": "*"
+    "pedding": "~1.0.0",
+    "should": "~3.3.1"
   },
-  "homepage": "https://github.com/fengmk2/qn",
+  "homepage": "https://github.com/node-modules/qn",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fengmk2/qn.git",
-    "web": "https://github.com/fengmk2/qn"
+    "url": "git://github.com/node-modules/qn.git",
+    "web": "https://github.com/node-modules/qn"
   },
   "bugs": {
-    "url": "https://github.com/fengmk2/qn/issues",
+    "url": "https://github.com/node-modules/qn/issues",
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
     "qn", "qiniu", "qbox", "node-qiniu"
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
   "license": "MIT"
