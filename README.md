@@ -198,13 +198,13 @@ var url = client.md2html('qn/test/fixtures/readme.md', {
 
 ## TODO
 
-* [√] RS Operations
+* [x] RS Operations
 * [ ] HTTP Keep-alive
-* [√] Image Operations
+* [x] Image Operations
 * [ ] Media Operations
-* [√] Doc Operations
+* [x] Doc Operations
 * [ ] Pipeline Operations
-* [√] QR code Operations
+* [x] QR code Operations
 
 ## License
 
