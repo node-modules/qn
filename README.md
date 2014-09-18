@@ -69,7 +69,7 @@ client.upload(fs.createReadStream(filepath), function (err, result) {
 });
 
 // you also can upload a string or Buffer directly
-client.upload('哈哈', {filename: 'haha.txt'}, function (err, result) {
+client.upload('哈哈', {key: 'haha.txt'}, function (err, result) {
   console.log(result);
   // hash: 'FptOdeKmWhcYHUXa5YmNZxJC934B',
   // key: 'foobar.txt',
