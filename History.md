@@ -1,4 +1,11 @@
 
+1.0.0 / 2014-09-19
+==================
+
+ * update deps
+ * fix empty string test
+ * Fix `client.upload()` example
+
 0.2.2 / 2014-05-15
 ==================
 
