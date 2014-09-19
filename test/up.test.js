@@ -167,9 +167,9 @@ describe('up.test.js', function () {
         should.not.exist(err);
         should.exist(result);
         result.should.eql({
-          hash: 'Fg==',
-          key: 'Fg==',
-          url: 'http://qiniu-sdk-test.qiniudn.com/Fg=='
+          hash: 'Fto5o-5ea0sNMlW_75VgGJCv2AcJ',
+          key: 'Fto5o-5ea0sNMlW_75VgGJCv2AcJ',
+          url: 'http://qiniu-sdk-test.qiniudn.com/Fto5o-5ea0sNMlW_75VgGJCv2AcJ'
         });
         done();
       });
