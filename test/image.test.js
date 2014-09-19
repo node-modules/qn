@@ -149,7 +149,7 @@ describe('image.test.js', function () {
         dx: 100,
         dy: 90
       });
-      url.should.include('?watermark/2/text/Tm9kZS5qcyDlk4jlk4g=/font/5a6L5L2T/fontsize/500/fill/cmVk/dissolve/100/gravity/SouthEast/dx/100/dy/90');
+      url.should.containEql('?watermark/2/text/Tm9kZS5qcyDlk4jlk4g=/font/5a6L5L2T/fontsize/500/fill/cmVk/dissolve/100/gravity/SouthEast/dx/100/dy/90');
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);

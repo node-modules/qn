@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "buffer-type": "~0.0.2",
-    "debug": "~1.0.4",
+    "debug": "~2.0.0",
     "formstream": "~0.0.8",
-    "urllib": "~0.5.16",
-    "utility": "~1.0.0"
+    "urllib": "~1.5.2",
+    "utility": "~1.2.0"
   },
   "devDependencies": {
     "autod": "*",
@@ -24,7 +24,8 @@
     "istanbul": "*",
     "mocha": "*",
     "pedding": "~1.0.0",
-    "should": "~3.3.1"
+    "should-http": "*",
+    "should": "~4.0.4"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {

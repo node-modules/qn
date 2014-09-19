@@ -10,6 +10,7 @@ test: install
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
+		--require should-http \
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
@@ -20,6 +21,7 @@ test-cov cov: install
 		-- \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
+		--require should-http \
 		$(MOCHA_OPTS) \
 		$(TESTS)
 	@-./node_modules/.bin/cov coverage
@@ -32,6 +34,7 @@ test-travis: install
 		-- \
 		--reporter dot \
 		--timeout $(TIMEOUT) \
+		--require should-http \
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
