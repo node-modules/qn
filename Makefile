@@ -24,7 +24,6 @@ test-cov cov: install
 		--require should-http \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	@-./node_modules/.bin/cov coverage
 
 test-travis: install
 	@NODE_ENV=test node \

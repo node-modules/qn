@@ -39,7 +39,7 @@ describe('client.test.js', function () {
       var client = qn.create(options);
       client.uploadFile(__filename, function (err, result) {
         should.not.exist(err);
-        console.log(result);
+        should.exist(result);
         done();
       });
     });

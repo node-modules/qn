@@ -23,7 +23,7 @@ Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.
 ## Install
 
 ```bash
-$ npm install qn
+$ npm install qn --save
 ```
 
 ## Usage
