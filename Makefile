@@ -4,7 +4,7 @@ TIMEOUT = 15000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=https://registry.npm.taobao.org
+	@npm install
 
 test: install
 	@NODE_ENV=test ./node_modules/.bin/mocha \
@@ -39,6 +39,9 @@ test-travis: install
 		$(TESTS)
 
 test-all: test test-cov
+
+contributors: install
+	@node_modules/.bin/contributors -f plain -o AUTHORS
 
 autod: install
 	@./node_modules/.bin/autod -w --prefix "~"

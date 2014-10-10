@@ -18,8 +18,6 @@ qn
 [david-image]: https://img.shields.io/david/node-modules/qn.svg?style=flat
 [david-url]: https://david-dm.org/node-modules/qn
 
-![logo](https://raw.github.com/node-modules/qn/master/logo.png)
-
 Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.
 
 ## Install
@@ -41,6 +39,8 @@ var client = qn.create({
   bucket: 'your bucket name',
   domain: 'http://{bucket}.u.qiniudn.com',
   // timeout: 3600000, // default rpc timeout: one hour, optional
+  // if your app outside of China, please set `uploadURL` to `http://up.qiniug.com/`
+  // uploadURL: 'http://up.qiniu.com/',
 });
 
 // upload a file with custom key
