@@ -72,8 +72,8 @@ client.upload(fs.createReadStream(filepath), function (err, result) {
 client.upload('哈哈', {key: 'haha.txt'}, function (err, result) {
   console.log(result);
   // hash: 'FptOdeKmWhcYHUXa5YmNZxJC934B',
-  // key: 'foobar.txt',
-  // url: 'http://qtestbucket.qiniudn.com/foobar.txt',
+  // key: 'haha.txt',
+  // url: 'http://qtestbucket.qiniudn.com/haha.txt',
 });
 
 // xVariables
