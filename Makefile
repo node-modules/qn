@@ -37,8 +37,6 @@ test-travis: install
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
-test-all: test test-cov
-
 contributors: install
 	@node_modules/.bin/contributors -f plain -o AUTHORS
 
