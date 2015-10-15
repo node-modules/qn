@@ -1,4 +1,16 @@
 
+1.1.0 / 2015-10-15
+==================
+
+ * feat: use http keepalive
+ * add 0.10 and iojs-1.2 test matrix
+ * fix tests on windows
+ * fix  Duplicate key
+ * add appveyor
+ * chore: breaking change notification and fallback
+ * chore: change domain to origin
+ * fix example
+
 1.0.1 / 2014-10-11
 ==================
 
