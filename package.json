@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "buffer-type": "~0.0.2",
-    "debug": "~2.0.0",
-    "formstream": "~0.0.8",
-    "urllib": "~1.5.2",
-    "utility": "~1.2.0"
+    "debug": "~2.2.0",
+    "formstream": "~1.0.0",
+    "urllib": "~2.5.0",
+    "utility": "~1.4.0"
   },
   "devDependencies": {
     "autod": "*",
@@ -20,7 +20,7 @@
     "mocha": "*",
     "pedding": "~1.0.0",
     "should-http": "*",
-    "should": "~4.0.4"
+    "should": "~7.1.0"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {
@@ -33,7 +33,10 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "qn", "qiniu", "qbox", "node-qiniu"
+    "qn",
+    "qiniu",
+    "qbox",
+    "node-qiniu"
   ],
   "engines": {
     "node": ">= 0.10.0"
