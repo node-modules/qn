@@ -7,11 +7,12 @@
     "test": "mocha test/*.test.js --timeout 15000 --require should-http"
   },
   "dependencies": {
+    "agentkeepalive": "~2.0.3",
     "buffer-type": "~0.0.2",
-    "debug": "~2.0.0",
+    "debug": "~2.2.0",
     "formstream": "~0.0.8",
-    "urllib": "~1.5.2",
-    "utility": "~1.2.0"
+    "urllib": "~2.5.0",
+    "utility": "~1.4.0"
   },
   "devDependencies": {
     "autod": "*",
@@ -20,7 +21,7 @@
     "mocha": "*",
     "pedding": "~1.0.0",
     "should-http": "*",
-    "should": "~4.0.4"
+    "should": "7"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {
@@ -33,11 +34,14 @@
     "email": "fengmk2@gmail.com"
   },
   "keywords": [
-    "qn", "qiniu", "qbox", "node-qiniu"
+    "qn",
+    "qiniu",
+    "qbox",
+    "node-qiniu"
   ],
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)",
   "license": "MIT"
 }

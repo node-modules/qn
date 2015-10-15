@@ -322,7 +322,8 @@ describe('rs.test.js', function () {
         results.should.length(2);
         results[0].code.should.equal(200);
         should.not.exist(results[0].data);
-        results[1].should.eql({ code: 612, data: { error: 'no such file or directory' } });
+        results[1].code.should.equal(612);
+        results[1].data.error.should.equal('no such file or directory');
         done();
       });
     });
