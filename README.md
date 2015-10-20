@@ -101,7 +101,7 @@ or with options
 var token = client.uploadToken({
   deadline: utility.timestamp() + 10
 });
-``
+```
 
 ### Download
 
