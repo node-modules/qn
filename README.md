@@ -86,6 +86,23 @@ client.upload(filepath, { 'x:foo': 'bar' }, function (err, result) {
 });
 ```
 
+### uploadToken
+
+```
+var token = client.uploadToken();
+```
+
+or with options
+
+- scope
+- deadline
+
+````
+var token = client.uploadToken({
+  deadline: utility.timestamp() + 10
+});
+``
+
 ### Download
 
 ```js
