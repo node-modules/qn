@@ -18,7 +18,7 @@
     "autod": "*",
     "contributors": "*",
     "istanbul": "*",
-    "mocha": "*",
+    "mocha": "2.3.3",
     "pedding": "~1.0.0",
     "should-http": "*",
     "should": "7"
