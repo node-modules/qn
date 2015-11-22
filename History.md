@@ -1,4 +1,10 @@
 
+1.1.1 / 2015-11-22
+==================
+
+ * fix: Update client.js
+ * chore(package): update mocha to version 2.3.4
+
 1.1.0 / 2015-10-15
 ==================
 
