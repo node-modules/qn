@@ -15,7 +15,7 @@
     "utility": "~1.6.0"
   },
   "devDependencies": {
-    "autod": "*",
+    "autod": "2.2.0",
     "contributors": "*",
     "istanbul": "*",
     "mocha": "2.3.4",
