@@ -10,7 +10,7 @@
     "agentkeepalive": "~2.0.3",
     "buffer-type": "~0.0.2",
     "debug": "~2.2.0",
-    "formstream": "~0.0.8",
+    "formstream": "~1.0.0",
     "urllib": "~2.5.0",
     "utility": "~1.6.0"
   },
