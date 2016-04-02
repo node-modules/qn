@@ -7,7 +7,7 @@
     "test": "mocha test/*.test.js --timeout 15000 --require should-http"
   },
   "dependencies": {
-    "agentkeepalive": "~2.0.3",
+    "agentkeepalive": "~2.1.0",
     "buffer-type": "~0.0.2",
     "debug": "~2.2.0",
     "formstream": "~0.0.8",
