@@ -10,7 +10,7 @@
     "agentkeepalive": "~2.1.1",
     "buffer-type": "~0.0.2",
     "debug": "~2.2.0",
-    "formstream": "~0.0.8",
+    "formstream": "~1.0.0",
     "urllib": "~2.8.0",
     "utility": "~1.6.0"
   },
@@ -18,10 +18,10 @@
     "autod": "*",
     "contributors": "*",
     "istanbul": "*",
-    "mocha": "2.4.5",
-    "pedding": "~1.0.0",
+    "mocha": "2",
+    "pedding": "1",
     "should-http": "*",
-    "should": "7"
+    "should": "8"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {
