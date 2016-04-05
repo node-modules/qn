@@ -1,4 +1,14 @@
 
+1.2.0 / 2016-04-06
+==================
+
+  * deps: upgrade formstream to 1.0.0
+  * feat: add rs /fetch action
+  * doc: add uploadToken usage
+  * deps: agentkeepalive@2.1.1
+  * chore(package): update urllib to version 2.8.0
+  * chore(package): update utility to version 1.6.0
+
 1.1.1 / 2015-11-22
 ==================
 
