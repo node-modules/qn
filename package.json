@@ -12,7 +12,7 @@
     "debug": "~2.2.0",
     "formstream": "~1.0.0",
     "urllib": "~2.8.0",
-    "utility": "~1.6.0"
+    "utility": "~1.7.1"
   },
   "devDependencies": {
     "autod": "*",
