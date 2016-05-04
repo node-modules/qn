@@ -20,7 +20,7 @@
     "istanbul": "*",
     "mocha": "2",
     "pedding": "1",
-    "should-http": "*",
+    "should-http": "0.0.4",
     "should": "8"
   },
   "homepage": "https://github.com/node-modules/qn",
