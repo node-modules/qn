@@ -21,7 +21,7 @@
     "mocha": "2",
     "pedding": "1",
     "should-http": "*",
-    "should": "8"
+    "should": "9.0.1"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {
