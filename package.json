@@ -17,7 +17,7 @@
   "devDependencies": {
     "autod": "*",
     "contributors": "*",
-    "istanbul": "*",
+    "istanbul": "0.4.4",
     "mocha": "2",
     "pedding": "1",
     "should-http": "*",
