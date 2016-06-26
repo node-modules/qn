@@ -1,15 +1,4 @@
-/*!
- * qn - test/rs.test.js
- *
- * Copyright(c) 2013 fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)
- * MIT Licensed
- */
-
-"use strict";
-
-/**
- * Module dependencies.
- */
+'use strict';
 
 var pedding = require('pedding');
 var should = require('should');
@@ -45,7 +34,7 @@ describe('rs.test.js', function () {
       this.client.stat(rsOpFile, function (err, info) {
         should.not.exist(err);
         should.exist(info);
-        info.should.have.keys('fsize', 'hash', 'mimeType', 'putTime')
+        info.should.have.keys('fsize', 'hash', 'mimeType', 'putTime');
         info.fsize.should.equal(8);
         info.hash.should.equal('FvnDEnGu6pjzxxxc5d6IlNMrbDnH');
         info.mimeType.should.equal('text/plain');

@@ -2,26 +2,34 @@
   "name": "qn",
   "version": "1.2.0",
   "description": "Another qiniu API client for Node.js.",
-  "main": "index.js",
+  "main": "lib/client.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "test": "mocha test/*.test.js --timeout 15000 --require should-http"
+    "test": "mocha -R spec -t 30000 -r should -r should-http test/*.test.js",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- -t 30000 -r should -r should-http test/*.test.js",
+    "ci": "npm run lint && npm run test-cov",
+    "lint": "jshint ."
   },
   "dependencies": {
-    "agentkeepalive": "~2.1.1",
-    "buffer-type": "~0.0.2",
-    "debug": "~2.2.0",
-    "formstream": "~1.0.0",
-    "urllib": "~2.8.0",
-    "utility": "~1.7.1"
+    "agentkeepalive": "^2.2.0",
+    "buffer-type": "^0.0.2",
+    "debug": "^2.2.0",
+    "formstream": "^1.0.0",
+    "urllib": "^2.11.0",
+    "utility": "^1.8.0"
   },
   "devDependencies": {
     "autod": "*",
     "contributors": "*",
+    "egg-ci": "^1.0.2",
     "istanbul": "*",
+    "jshint": "^2.9.2",
     "mocha": "2",
     "pedding": "1",
-    "should-http": "*",
-    "should": "8"
+    "should": "8",
+    "should-http": "*"
   },
   "homepage": "https://github.com/node-modules/qn",
   "repository": {
@@ -41,6 +49,9 @@
   ],
   "engines": {
     "node": ">= 0.10.0"
+  },
+  "ci": {
+    "version": "4, 6"
   },
   "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)",
   "license": "MIT"
