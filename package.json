@@ -21,8 +21,6 @@
     "utility": "^1.8.0"
   },
   "devDependencies": {
-    "autod": "*",
-    "contributors": "*",
     "egg-ci": "^1.0.2",
     "istanbul": "*",
     "jshint": "^2.9.2",
