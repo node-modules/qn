@@ -3,20 +3,24 @@ qn
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![Gittip][gittip-image]][gittip-url]
+[![Test coverage][codecov-image]][codecov-url]
 [![David deps][david-image]][david-url]
+[![Known Vulnerabilities][snyk-image]][snyk-url]
+[![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/qn.svg?style=flat
 [npm-url]: https://npmjs.org/package/qn
 [travis-image]: https://img.shields.io/travis/node-modules/qn.svg?style=flat
 [travis-url]: https://travis-ci.org/node-modules/qn
-[coveralls-image]: https://img.shields.io/coveralls/node-modules/qn.svg?style=flat
-[coveralls-url]: https://coveralls.io/r/node-modules/qn?branch=master
-[gittip-image]: https://img.shields.io/gittip/fengmk2.svg?style=flat
-[gittip-url]: https://www.gittip.com/fengmk2/
+[codecov-image]: https://codecov.io/gh/node-modules/qn/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/node-modules/qn
 [david-image]: https://img.shields.io/david/node-modules/qn.svg?style=flat
 [david-url]: https://david-dm.org/node-modules/qn
+[snyk-image]: https://snyk.io/test/npm/qn/badge.svg?style=flat-square
+[snyk-url]: https://snyk.io/test/npm/qn
+[download-image]: https://img.shields.io/npm/dm/qn.svg?style=flat-square
+[download-url]: https://npmjs.org/package/qn
+
 
 Another [qiniu](http://docs.qiniu.com/api/) API client for Node.js.
 
