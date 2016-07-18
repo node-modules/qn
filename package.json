@@ -26,7 +26,7 @@
     "jshint": "^2.9.2",
     "mocha": "2",
     "pedding": "1",
-    "should": "8",
+    "should": "10.0.0",
     "should-http": "*"
   },
   "homepage": "https://github.com/node-modules/qn",
