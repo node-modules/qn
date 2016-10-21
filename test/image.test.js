@@ -22,12 +22,15 @@ describe('image.test.js', function () {
   });
 
   before(function (done) {
+    done = pedding(3, done);
+    this.client.uploadFile(path.join(__dirname, 'fixtures', 'logo.png'), {key: 'qn/fixtures/logo.png'}, done);
+    this.client.uploadFile(path.join(__dirname, 'fixtures', 'big.txt'), {key: 'qn/fixtures/big.txt'}, done);
     this.client.uploadFile(path.join(__dirname, 'fixtures', 'gogopher.jpg'), {key: 'qn/fixtures/gogopher.jpg'}, done);
   });
 
   describe('imageInfo()', function () {
     it('should return image info', function (done) {
-      this.client.imageInfo('qn/logo.png', function (err, info) {
+      this.client.imageInfo('qn/fixtures/logo.png', function (err, info) {
         should.not.exist(err);
         info.should.have.keys('format', 'width', 'height', 'colorModel');
         info.should.eql({ format: 'png', width: 190, height: 150, colorModel: 'nrgba' });
@@ -80,7 +83,7 @@ describe('image.test.js', function () {
     });
 
     it('should return error when file is not image', function (done) {
-      var url = this.client.imageView('qn/big.txt', {mode: 1, width: 50, height: 50});
+      var url = this.client.imageView('qn/fixtures/big.txt', {mode: 1, width: 50, height: 50});
       url.should.match(/\?imageView\/1\/w\/50\/h\/50$/);
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
@@ -118,7 +121,7 @@ describe('image.test.js', function () {
 
   describe('imageMogr()', function () {
     it('should rotate a image', function (done) {
-      var url = this.client.imageMogr('qn/logo.png', {
+      var url = this.client.imageMogr('qn/fixtures/logo.png', {
         thumbnail: '!50p',
         gravity: 'NorthWest',
         quality: 50,
@@ -138,7 +141,7 @@ describe('image.test.js', function () {
 
   describe('watermark()', function () {
     it('should return text watermark image', function (done) {
-      var url = this.client.watermark('qn/logo.png', {
+      var url = this.client.watermark('qn/fixtures/logo.png', {
         mode: 2,
         text: 'Node.js 哈哈',
         font: '宋体',
