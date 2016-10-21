@@ -238,9 +238,9 @@ describe('rs.test.js', function () {
         result.items.should.length(5);
         result.marker.should.be.a.String;
         // next page
-        that.client.list({prefix: '/qn', limit: 11, marker: result.marker}, function (err, result2) {
+        that.client.list({prefix: '/qn', limit: 5, marker: result.marker}, function (err, result2) {
           should.not.exist(err);
-          result2.items.should.length(11);
+          result2.items.should.length(5);
           result2.marker.should.be.a.String;
           done();
         });

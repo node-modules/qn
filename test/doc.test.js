@@ -13,6 +13,7 @@
 var should = require('should');
 var urllib = require('urllib');
 var path = require('path');
+var config = require('./config.json');
 
 describe('doc.test.js', function () {
   before(function () {
@@ -41,9 +42,9 @@ describe('doc.test.js', function () {
 
     it('should convert markdown to html with css', function (done) {
       var url = this.client.md2html('qn/test/fixtures/readme.md', {
-        css: 'http://qiniu-sdk-test.qiniudn.com/qn/test/fixtures/github.css'
+        css: config.domain + '/qn/test/fixtures/github.css'
       });
-      url.should.containEql('.qiniudn.com/qn/test/fixtures/readme.md?md2html/0/css/aHR0cDovL3Fpbml1LXNkay10ZXN0LnFpbml1ZG4uY29tL3FuL3Rlc3QvZml4dHVyZXMvZ2l0aHViLmNzcw==');
+      url.should.containEql('.qiniudn.com/qn/test/fixtures/readme.md?md2html/0/css/aHR0cDovL25vZGVzZGsucWluaXVkbi5jb20vcW4vdGVzdC9maXh0dXJlcy9naXRodWIuY3Nz');
       urllib.request(url, function (err, data, res) {
         should.not.exist(err);
         data.length.should.above(0);

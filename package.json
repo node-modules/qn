@@ -24,9 +24,9 @@
     "egg-ci": "^1.0.2",
     "istanbul": "*",
     "jshint": "^2.9.2",
-    "mocha": "2",
+    "mocha": "^3.1.2",
     "pedding": "1",
-    "should": "8",
+    "should": "^11.1.1",
     "should-http": "*"
   },
   "homepage": "https://github.com/node-modules/qn",

@@ -16,6 +16,7 @@ var fs = require('fs');
 var path = require('path');
 var utility = require('utility');
 var qn = require('../');
+var config = require('./config.json');
 
 var root = path.dirname(__dirname);
 var fixtures = path.join(__dirname, 'fixtures');
@@ -91,7 +92,7 @@ describe('up.test.js', function () {
         result.should.have.keys('hash', 'key', 'url', 'x:ctime', 'x:filename', 'x:mtime', 'x:size');
         result.hash.should.equal('FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki');
         result.key.should.equal('qn/test/logo.png');
-        result.url.should.equal('http://qiniu-sdk-test.qiniudn.com/qn/test/logo.png');
+        result.url.should.equal(config.domain + '/qn/test/logo.png');
         result["x:filename"].should.equal('logo.png');
         result["x:ctime"].should.be.match(/^[\d\.]+$/);
         result["x:mtime"].should.be.match(/^[\d\.]+$/);
@@ -127,10 +128,11 @@ describe('up.test.js', function () {
 
     it('should success when upload same key and same content', function (done) {
       this.client.upload('foo bar 哈哈', {filename: 'foo', key: 'foo'}, function (err, result) {
-        should.exist(err);
-        err.name.should.equal('QiniuFileExistsError');
-        err.code.should.equal(614);
-        err.message.should.equal('file exists');
+        should.not.exist(err);
+        should.exist(result);
+        result.hash.should.equal('FiuFB_kYboxBnU6VCMirPzLtIpIq');
+        result.key.should.equal('foo');
+        result.url.should.containEql('.qiniudn.com/foo');
         done();
       });
     });
@@ -150,7 +152,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FptOdeKmWhcYHUXa5YmNZxJC934B',
           key: 'foobar.txt',
-          url: 'http://qiniu-sdk-test.qiniudn.com/foobar.txt',
+          url: config.domain + '/foobar.txt',
           'x:foo': 'bar哈哈',
           "x:ctime": "2013-09-02T19:32:51.000Z",
           "x:filename": "logo.png",
@@ -169,7 +171,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'Fto5o-5ea0sNMlW_75VgGJCv2AcJ',
           key: 'Fto5o-5ea0sNMlW_75VgGJCv2AcJ',
-          url: 'http://qiniu-sdk-test.qiniudn.com/Fto5o-5ea0sNMlW_75VgGJCv2AcJ'
+          url: config.domain + '/Fto5o-5ea0sNMlW_75VgGJCv2AcJ'
         });
         done();
       });
@@ -204,7 +206,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
+          url: config.domain + '/FhRP7GIsuzMrSOp0AQnVVymMNsXJ'
         });
         done();
       });
@@ -218,7 +220,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'qn/big.txt',
-          url: 'http://qiniu-sdk-test.qiniudn.com/qn/big.txt'
+          url: config.domain + '/qn/big.txt'
         });
         done();
       });
@@ -231,7 +233,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
+          url: config.domain + '/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
         });
         done();
       });
@@ -244,7 +246,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
+          url: config.domain + '/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki'
         });
         done();
       });
@@ -257,7 +259,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'qn/logo.png',
-          url: 'http://qiniu-sdk-test.qiniudn.com/qn/logo.png'
+          url: config.domain + '/qn/logo.png'
         });
         done();
       });
@@ -273,7 +275,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: config.domain + '/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           "x:filename": "big.txt",
         });
         done();
@@ -289,7 +291,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           key: 'foo_chunked.txt',
-          url: 'http://qiniu-sdk-test.qiniudn.com/foo_chunked.txt',
+          url: config.domain + '/foo_chunked.txt',
           "x:filename": "foo.txt",
         });
         done();
@@ -304,7 +306,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           key: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          url: config.domain + '/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           "x:filename": "foo.txt",
         });
         done();
@@ -321,7 +323,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           key: 'FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
+          url: config.domain + '/FvnDEnGu6pjzxxxc5d6IlNMrbDnH',
           "x:filename": "foo.txt",
         });
         done();
@@ -337,7 +339,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           key: 'FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
+          url: config.domain + '/FhRP7GIsuzMrSOp0AQnVVymMNsXJ',
           "x:filename": "big.txt",
         });
         done();
@@ -351,7 +353,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
-          url: 'http://qiniu-sdk-test.qiniudn.com/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
+          url: config.domain + '/FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           "x:filename": "logo.png",
         });
         done();
@@ -383,7 +385,7 @@ describe('up.test.js', function () {
         result.should.eql({
           hash: 'FvzqAF1oWlYgQ9t62k_xn_mzZ1Ki',
           key: 'qn/logo_chunked.png',
-          url: 'http://qiniu-sdk-test.qiniudn.com/qn/logo_chunked.png',
+          url: config.domain + '/qn/logo_chunked.png',
           "x:filename": "logo.png",
         });
         done();
