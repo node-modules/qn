@@ -46,7 +46,7 @@
     "node-qiniu"
   ],
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "ci": {
     "version": "4, 6"
