@@ -25,7 +25,7 @@
     "istanbul": "*",
     "jshint": "^2.9.2",
     "mocha": "^3.1.2",
-    "pedding": "1",
+    "pedding": "1.0.0",
     "should": "^11.1.1",
     "should-http": "*"
   },
