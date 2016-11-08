@@ -21,7 +21,7 @@
     "utility": "^1.8.0"
   },
   "devDependencies": {
-    "egg-ci": "^1.0.2",
+    "egg-ci": "^1.0.3",
     "istanbul": "*",
     "jshint": "^2.9.2",
     "mocha": "^3.1.2",
