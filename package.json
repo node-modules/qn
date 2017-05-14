@@ -24,7 +24,7 @@
     "egg-ci": "^1.0.2",
     "istanbul": "*",
     "jshint": "^2.9.2",
-    "mocha": "^3.1.2",
+    "mocha": "^3.4.0",
     "pedding": "1",
     "should": "^11.1.1",
     "should-http": "*"
