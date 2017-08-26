@@ -33,7 +33,7 @@ describe('image.test.js', function () {
       this.client.imageInfo('qn/fixtures/logo.png', function (err, info) {
         should.not.exist(err);
         info.should.have.keys('format', 'width', 'height', 'colorModel');
-        info.should.eql({ format: 'png', width: 190, height: 150, colorModel: 'nrgba' });
+        info.should.eql({ size: 21944, format: 'png', width: 190, height: 150, colorModel: 'nrgba' });
         done();
       });
     });
