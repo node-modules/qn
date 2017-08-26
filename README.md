@@ -101,7 +101,7 @@ or with options
 - scope
 - deadline
 
-````
+```
 var token = client.uploadToken({
   deadline: utility.timestamp() + 10
 });
@@ -219,13 +219,13 @@ var url = client.md2html('qn/test/fixtures/readme.md', {
 
 ## TODO
 
-* [x] RS Operations
-* [ ] HTTP Keep-alive
-* [x] Image Operations
-* [ ] Media Operations
-* [x] Doc Operations
-* [ ] Pipeline Operations
-* [x] QR code Operations
+- [x] RS Operations
+- [ ] HTTP Keep-alive
+- [x] Image Operations
+- [ ] Media Operations
+- [x] Doc Operations
+- [ ] Pipeline Operations
+- [x] QR code Operations
 
 ## License
 
