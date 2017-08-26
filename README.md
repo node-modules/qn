@@ -170,7 +170,7 @@ client.list('/', function (err, result) {
 // imageInfo
 client.imageInfo('qn/logo.png', function (err, info) {
   console.log(info);
-  // { format: 'png', width: 190, height: 150, colorModel: 'nrgba' }
+  // { size: 21944, format: 'png', width: 190, height: 150, colorModel: 'nrgba' }
 });
 
 // exif

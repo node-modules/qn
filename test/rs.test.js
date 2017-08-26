@@ -38,7 +38,7 @@ describe('rs.test.js', function () {
         info.fsize.should.equal(8);
         info.hash.should.equal('FvnDEnGu6pjzxxxc5d6IlNMrbDnH');
         info.mimeType.should.equal('text/plain');
-        info.putTime.should.match(/^\d+$/);
+        info.putTime.should.be.a.Number();
         done();
       });
     });
