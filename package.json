@@ -10,7 +10,9 @@
     "test": "mocha -R spec -t 30000 -r should -r should-http test/*.test.js",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- -t 30000 -r should -r should-http test/*.test.js",
     "ci": "npm run lint && npm run test-cov",
-    "lint": "jshint ."
+    "lint": "jshint .",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "agentkeepalive": "^2.2.0",
@@ -18,7 +20,8 @@
     "debug": "^2.2.0",
     "formstream": "^1.0.0",
     "urllib": "^2.11.0",
-    "utility": "^1.8.0"
+    "utility": "^1.8.0",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "egg-ci": "^1.0.2",
@@ -52,5 +55,6 @@
     "version": "4, 6"
   },
   "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
