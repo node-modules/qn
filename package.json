@@ -17,7 +17,7 @@
     "buffer-type": "^0.0.2",
     "debug": "^2.2.0",
     "formstream": "^1.0.0",
-    "urllib": "^2.11.0",
+    "urllib": "^3.0.0",
     "utility": "^1.8.0"
   },
   "devDependencies": {
